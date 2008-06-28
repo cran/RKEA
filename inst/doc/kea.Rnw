@@ -1,0 +1,78 @@
+\documentclass[a4paper]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage{url}
+
+\newcommand{\strong}[1]{{\normalfont\fontseries{b}\selectfont #1}}
+\newcommand{\code}[1]{\mbox{\texttt{#1}}}
+\newcommand{\pkg}[1]{\strong{#1}}
+\newcommand{\proglang}[1]{\textsf{#1}}
+\newcommand{\acronym}[1]{\textsc{#1}}
+
+%% \VignetteIndexEntry{Introduction to the RKEA Package}
+
+\begin{document}
+<<echo=FALSE>>=
+options(width = 75)
+### for sampling
+set.seed <- 1234
+@
+\title{Introduction to the \pkg{RKEA} Package}
+\author{Ingo Feinerer}
+\maketitle
+
+\begin{abstract}
+  A short introduction to the \pkg{RKEA} package.
+\end{abstract}
+
+\section*{Introduction}
+The \pkg{RKEA} package provides a \proglang{R} interface to
+\proglang{KEA}\footnote{\url{http://www.nzdl.org/Kea/}}, a tool for
+keyword extraction in texts.
+
+\section*{Loading the Package}
+Before actually working we need to load the package:
+<<>>=
+library("RKEA")
+@
+
+\section*{Creating a Keyword Extraction Model}
+\proglang{KEA} needs a keyword extraction model for keyword extraction. You can
+build your own models by manually indexing the keywords in a small set
+of texts, and then call \code{createModel()}.
+<<keep.source=TRUE>>=
+library("tm")
+data(crude)
+
+keywords <- list(c("Diamond", "crude oil", "price"),
+                 c("OPEC", "oil", "price"),
+                 c("Texaco", "oil", "price", "decrease"),
+                 c("Marathon Petroleum", "crude", "decrease"),
+                 c("Houston Oil", "revenues", "decrease"),
+                 c("Kuwait", "OPEC", "quota"))
+
+tmpdir <- tempfile()
+dir.create(tmpdir)
+model <- file.path(tmpdir, "crudeModel")
+
+createModel(crude[1:6], keywords, model)
+@
+
+Please note that we just wrap the functionality of the original
+\proglang{KEA} program which always uses files for in- and output (and
+that is the reason you also need to use a directory in \proglang{R} as
+shown in the above example). We deliberately decided not to modify the
+\proglang{KEA} java archive shipped with this \proglang{R} package for
+compatibility reasons. However this may induce some warnings in
+\proglang{R} (e.g., because some internal \proglang{KEA} paths might
+not be available) but nevertheless you should get the full
+functionality out of it.
+
+\section*{Keyword Extraction}
+Once you have a \proglang{KEA} model you can extract keywords from texts.
+<<keep.source=TRUE>>=
+extractKeywords(crude, model)
+
+unlink(tmpdir, recursive = TRUE)
+@
+\end{document}
