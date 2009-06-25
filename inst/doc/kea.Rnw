@@ -31,18 +31,21 @@ The \pkg{RKEA} package provides a \proglang{R} interface to
 keyword extraction in texts.
 
 \section*{Loading the Package}
+
 Before actually working we need to load the package:
 <<>>=
 library("RKEA")
 @
 
 \section*{Creating a Keyword Extraction Model}
-\proglang{KEA} needs a keyword extraction model for keyword extraction. You can
-build your own models by manually indexing the keywords in a small set
-of texts, and then call \code{createModel()}.
+
+\proglang{KEA} needs a keyword extraction model for keyword
+extraction. You can build your own models by manually indexing the
+keywords in a small set of texts, and then call \code{createModel()}.
+
 <<keep.source=TRUE>>=
 library("tm")
-data(crude)
+data("crude")
 
 keywords <- list(c("Diamond", "crude oil", "price"),
                  c("OPEC", "oil", "price"),
@@ -64,15 +67,18 @@ that is the reason you also need to use a directory in \proglang{R} as
 shown in the above example). We deliberately decided not to modify the
 \proglang{KEA} java archive shipped with this \proglang{R} package for
 compatibility reasons. However this may induce some warnings in
-\proglang{R} (e.g., because some internal \proglang{KEA} paths might
-not be available) but nevertheless you should get the full
-functionality out of it.
+\proglang{R} (e.g., because some internal \proglang{KEA} paths might not
+be available) but nevertheless you should get the full functionality out
+of it.
 
 \section*{Keyword Extraction}
+
 Once you have a \proglang{KEA} model you can extract keywords from texts.
+
 <<keep.source=TRUE>>=
 extractKeywords(crude, model)
 
 unlink(tmpdir, recursive = TRUE)
 @
+
 \end{document}

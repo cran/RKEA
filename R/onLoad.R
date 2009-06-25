@@ -1,9 +1,16 @@
-.onLoad <- function(libname, pkgname) {
-    require("rJava")
-    .jinit(system.file("java",
-                       c("commons-logging.jar", "icu4j_3_4.jar", "iri.jar", "jena.jar", "kea-5.0.jar",
-                         system.file("jar", "snowball.jar", package = "Snowball"),
-                         system.file("jar", "weka.jar", package = "RWeka"), "xercesImpl.jar"),
-                       package = pkgname,
-                       lib.loc = libname))
+.onLoad <-
+function(libname, pkgname)
+{
+    ## Create and populate RKEA_work_dir to avoid the warnings resulting
+    ## from KEA's hard-coding of stopword file paths.
+    RKEA_work_dir <<- tempfile()
+    dir.create(file.path(RKEA_work_dir, "data", "stopwords"),
+               recursive = TRUE)
+    file.copy(Sys.glob(file.path(system.file("stopwords",
+                                             package = pkgname,
+                                             lib.loc = libname),
+                                 "stopwords_*.txt")),
+              file.path(RKEA_work_dir, "data", "stopwords"))
+
+    rJava::.jpackage(pkgname, lib.loc = libname)
 }
