@@ -1,4 +1,5 @@
 importFrom("rJava", ".jcall", ".jcast", ".jfield", ".jnew", ".jpackage")
+importFrom("tm", "writeCorpus")
 
 export("createModel",
        "extractKeywords")

@@ -1,11 +1,12 @@
-27969f4ef5d18715fd5ea21c4cb1184a *DESCRIPTION
-86f42d48cc9c5a33428035946752a6b9 *NAMESPACE
-b26eee59a600379b08fac0cf00dcb9a6 *R/kea.R
+3e51669e7a7e5e3a9791dee8e17c1329 *DESCRIPTION
+8f63fcc5cf6a7d2e7d4c7a1da5b7dbac *NAMESPACE
+117ac94232260af3ffc0575b7cd7ff55 *R/kea.R
 6723d3d47a1a240a6fbc9146f630555f *R/onLoad.R
+5f5de23937f0c0240e12304c51c84b28 *build/vignette.rds
 2206ebe281d5e0fd89a61dbc3c30646f *configure
 4cdffd5a97a9081613a9fdd11a4bcc19 *inst/doc/kea.R
 7ccdcc1e49742233aea2d7a2be8c01c8 *inst/doc/kea.Rnw
-6a86453aad4d2b29015211d19afac28c *inst/doc/kea.pdf
+6bc9a9ab8aa21f31baed133bd5f9f201 *inst/doc/kea.pdf
 8a507817b28077e0478add944c64586a *inst/java/commons-logging.jar
 f02dd999d9ee248ee5f2b71db203316f *inst/java/icu4j_3_4.jar
 0cc0d4ca47efd59ef6a28eda75d751bd *inst/java/iri.jar

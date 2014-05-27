@@ -24,8 +24,8 @@ function(corpus, keywords, model, voc = "none", vocformat = "")
         unlink(tmpdir, recursive = TRUE)
     })
     setwd(RKEA_work_dir)
-    tm::writeCorpus(corpus, path = tmpdir,
-                    filenames = sprintf("%s.txt", seq_along(corpus)))
+    writeCorpus(corpus, path = tmpdir,
+                filenames = sprintf("%s.txt", seq_along(corpus)))
     writeKeys(keywords,
               file.path(tmpdir, sprintf("%s.key", seq_along(corpus))))
 
@@ -63,8 +63,8 @@ function(corpus, model, voc = "none", vocformat = "")
     tmpdir <- tempfile()
     dir.create(tmpdir)
     on.exit(unlink(tmpdir, recursive = TRUE))
-    tm::writeCorpus(corpus, path = tmpdir,
-                    filenames = sprintf("%s.txt", seq_along(corpus)))
+    writeCorpus(corpus, path = tmpdir,
+                filenames = sprintf("%s.txt", seq_along(corpus)))
     
     ## KEA does
     ##  System.err.println("-- Extracting Keyphrases... ");
