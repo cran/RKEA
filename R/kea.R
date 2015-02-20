@@ -23,7 +23,35 @@ function(corpus, keywords, model, voc = "none", vocformat = "")
         setwd(cwd)
         unlink(tmpdir, recursive = TRUE)
     })
+
+    ## KEA can use vocabularies in format skos or text.
+    ## In these case, we need to check for the existence of all voc
+    ## files needed by KEA (otherwise, it will call System.exit(1)), and
+    ## make these available in the VOCABULARIES subdirectory of the KEA
+    ## word directory
+    vocfiles <- character()
+    if(identical(vocformat, "skos")) {
+        vocfiles <- paste0(voc, ".rdf")
+        if(!file.exists(vocfiles))
+            stop(sprintf("Vocabulary file '%s' does not exist.",
+                         vocfiles))
+
+    } else if(identical(vocformat, "text")) {
+        vocfiles <- paste0(voc, c(".en", ".rel", ".use"))
+        if(length(pos <- which(!file.exists(vocfiles))))
+            stop(sprintf("Vocabulary file '%s' does not exist.",
+                         vocfiles[pos[1L]]))
+    }
+    if(length(vocfiles)) {
+        vocdir <- file.path(RKEA_work_dir, "VOCABULARIES")
+        dir.create(vocdir)
+        on.exit(unlink(vocdir, recursive = TRUE), add = TRUE)
+        file.copy(vocfiles, vocdir)
+        voc <- basename(voc)
+    }
+    
     setwd(RKEA_work_dir)
+
     writeCorpus(corpus, path = tmpdir,
                 filenames = sprintf("%s.txt", seq_along(corpus)))
     writeKeys(keywords,

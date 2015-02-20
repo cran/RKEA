@@ -1,0 +1,17 @@
+Sources for the jars distributed with this package can be obtained as
+follows.
+
+  commons-logging.jar:
+    <http://commons.apache.org/proper/commons-logging/>
+
+  icu4j_3_4.jar:
+    <http://www.ibm.com/software/globalization/icu/downloads.jsp>
+      
+  iri.jar, jena.jar, xercesImpl.jar:
+    <http://jena.sourceforge.net>
+
+  kea-5.0.jar:
+    <https://code.google.com/p/kea-algorithm/downloads>
+    
+  weka.jar:
+    <http://www.cs.waikato.ac.nz/~ml/weka/>

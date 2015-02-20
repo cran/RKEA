@@ -1,12 +1,12 @@
-3e51669e7a7e5e3a9791dee8e17c1329 *DESCRIPTION
+9cf521823a1d20d3b1fd0a4662a0a4e1 *DESCRIPTION
 8f63fcc5cf6a7d2e7d4c7a1da5b7dbac *NAMESPACE
-117ac94232260af3ffc0575b7cd7ff55 *R/kea.R
+c8953935344e965d91b0cf28d3503f17 *R/kea.R
 6723d3d47a1a240a6fbc9146f630555f *R/onLoad.R
-5f5de23937f0c0240e12304c51c84b28 *build/vignette.rds
+7a39fad120129e4ac6ef4913a9947141 *build/vignette.rds
 2206ebe281d5e0fd89a61dbc3c30646f *configure
 4cdffd5a97a9081613a9fdd11a4bcc19 *inst/doc/kea.R
 7ccdcc1e49742233aea2d7a2be8c01c8 *inst/doc/kea.Rnw
-6bc9a9ab8aa21f31baed133bd5f9f201 *inst/doc/kea.pdf
+1cc6360d06d6c06840c3e9cd1f91abcf *inst/doc/kea.pdf
 8a507817b28077e0478add944c64586a *inst/java/commons-logging.jar
 f02dd999d9ee248ee5f2b71db203316f *inst/java/icu4j_3_4.jar
 0cc0d4ca47efd59ef6a28eda75d751bd *inst/java/iri.jar
@@ -18,7 +18,8 @@ d399afceea88c2730716e64880138344 *inst/java/snowball.jar
 b2c07af94d1e6c6f86f7635bf61e44c4 *inst/stopwords/stopwords_en.txt
 3a4a12ebc11f24e33830a387dbd28865 *inst/stopwords/stopwords_es.txt
 fb4fcb3522b8242e74a846018d5b8257 *inst/stopwords/stopwords_fr.txt
-6a377e318222b12b402c14ba43d10128 *man/createModel.Rd
+d317a5864deb5e6fe34f42abaddbc3eb *java/README
+dc737fd9e116fc780f480b352340f41a *man/createModel.Rd
 0a9cded208a2a83a519c061307bd563a *man/extractKeywords.Rd
 b2f00fd4d3162f7345ca6a14db8bd1df *tools/getsp.class
 d98d48a1d5c1bbec93a7a584509199e6 *tools/getsp.java
