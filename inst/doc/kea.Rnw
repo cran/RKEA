@@ -1,5 +1,8 @@
 \documentclass[a4paper]{article}
 
+\setlength{\textwidth}{140mm}
+\setlength{\oddsidemargin}{10mm}
+
 \usepackage[utf8]{inputenc}
 \usepackage{url}
 
@@ -8,6 +11,9 @@
 \newcommand{\pkg}[1]{\strong{#1}}
 \newcommand{\proglang}[1]{\textsf{#1}}
 \newcommand{\acronym}[1]{\textsc{#1}}
+\newcommand{\file}[1]{\textsf{#1}}
+
+\sloppy
 
 %% \VignetteIndexEntry{Introduction to the RKEA Package}
 
@@ -18,7 +24,7 @@ options(width = 75)
 set.seed <- 1234
 @
 \title{Introduction to the \pkg{RKEA} Package}
-\author{Ingo Feinerer}
+\author{Ingo Feinerer \and Kurt Hornik}
 \maketitle
 
 \begin{abstract}
@@ -26,9 +32,22 @@ set.seed <- 1234
 \end{abstract}
 
 \section*{Introduction}
+
 The \pkg{RKEA} package provides a \proglang{R} interface to
-\proglang{KEA}\footnote{\url{http://www.nzdl.org/Kea/}}, a tool for
-keyword extraction in texts.
+\proglang{Kea} (\url{http://www.nzdl.org/Kea/}), a tool for keyword
+extraction in texts.  See \url{https://code.google.com/p/kea-algorithm/}
+and \url{http://www.nzdl.org/Kea/Download/Kea-5.0-Readme.txt} for
+further information on \proglang{Kea}.
+
+Note that \proglang{Maui} (\url{http://maui-indexer.googlecode.com/}),
+an algorithm for topic indexing, can be used for the same tasks as
+\proglang{Kea}, but offers additional features, including indexing using
+Wikipedia as a controlled vocabulary.  See
+\url{https://www.airpair.com/nlp/keyword-extraction-tutorial} for a
+tutorial on NLP keyword extraction with \proglang{Maui} and RAKE (Rapid
+Automatic Keyword Extraction): note however that currently there is no
+\proglang{R} interface to \proglang{Maui}, nor an \proglang{R}
+implementation of RAKE.
 
 \section*{Loading the Package}
 
@@ -39,7 +58,7 @@ library("RKEA")
 
 \section*{Creating a Keyword Extraction Model}
 
-\proglang{KEA} needs a keyword extraction model for keyword
+\proglang{Kea} needs a keyword extraction model for keyword
 extraction. You can build your own models by manually indexing the
 keywords in a small set of texts, and then call \code{createModel()}.
 
@@ -62,23 +81,50 @@ createModel(crude[1:6], keywords, model)
 @
 
 Please note that we just wrap the functionality of the original
-\proglang{KEA} program which always uses files for in- and output (and
+\proglang{Kea} program which always uses files for in- and output (and
 that is the reason you also need to use a directory in \proglang{R} as
 shown in the above example). We deliberately decided not to modify the
-\proglang{KEA} java archive shipped with this \proglang{R} package for
+\proglang{Kea} Java archive shipped with this \proglang{R} package for
 compatibility reasons. However this may induce some warnings in
-\proglang{R} (e.g., because some internal \proglang{KEA} paths might not
+\proglang{R} (e.g., because some internal \proglang{Kea} paths might not
 be available) but nevertheless you should get the full functionality out
 of it.
 
 \section*{Keyword Extraction}
 
-Once you have a \proglang{KEA} model you can extract keywords from texts.
+Once you have a \proglang{Kea} model you can extract keywords from texts.
 
 <<keep.source=TRUE>>=
 extractKeywords(crude, model)
 
 unlink(tmpdir, recursive = TRUE)
 @
+
+\section*{Working with Controlled Vocabularies}
+
+The data used for the keyword extraction tutorial with \proglang{Maui}
+and RAKE can be downloaded from
+\url{https://maui-indexer.googlecode.com/files/fao780.tar.gz}; the
+AGROVOC Agricultural Thesaurus can be obtained from
+\url{http://www.nzdl.org/Kea/Download/vocabularies/agrovoc.skos.zip}
+(SKOS format) or
+\url{http://www.nzdl.org/Kea/Download/vocabularies/agrovoc.text.zip}
+(text format).
+
+With the data unpacked to subdirectory \file{fao780} and
+\file{agrovoc.skos.zip} unzipped in the working directory, one can use 
+<<eval=false>>=
+txts <- Sys.glob(file.path("fao780", "*.txt"))
+keys <- sub("txt$", "key", txts)
+txts <- lapply(txts, readLines)
+keys <- lapply(keys, readLines)
+build <- seq_len(100)
+xtrct <- seq(101, 105)
+model <- "fao780_model"
+createModel(txts[build], keys[build], model, "agrovoc", "skos")
+extractKeywords(txts[xtrct], model, "agrovoc", "skos")
+@ 
+to build a keyword model using the first 100 texts, and use the model to
+extract the keywords from the next 5 texts.
 
 \end{document}

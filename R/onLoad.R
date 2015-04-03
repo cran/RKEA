@@ -7,10 +7,7 @@ function(libname, pkgname)
     dir.create(file.path(RKEA_work_dir, "data", "stopwords"),
                recursive = TRUE)
     file.copy(Sys.glob(file.path(system.file("stopwords",
-                                             package = pkgname,
-                                             lib.loc = libname),
+                                             package = "RKEAjars"),
                                  "stopwords_*.txt")),
               file.path(RKEA_work_dir, "data", "stopwords"))
-
-    rJava::.jpackage(pkgname, lib.loc = libname)
 }

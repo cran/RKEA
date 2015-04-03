@@ -10,7 +10,7 @@ createModel(corpus, keywords, model, voc = "none", vocformat = "")
 \arguments{
   \item{corpus}{A list of character vectors containing the text
     documents, e.g., a \code{Corpus} object as provided by
-    package~\pkg{tm}.}
+    package \pkg{tm}.}
   \item{keywords}{A list of character vectors containing the keywords
     for each document in \code{corpus}.}
   \item{model}{A character giving the path where the created model

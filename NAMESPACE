@@ -1,3 +1,4 @@
+import("RKEAjars")
 importFrom("rJava", ".jcall", ".jcast", ".jfield", ".jnew", ".jpackage")
 importFrom("tm", "writeCorpus")
 
